@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peoplego</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="/styles.css" type="text/css">
+</head>
+<body>
+    <h1 class="title">Peoplego - a REST API</h1>
+    <div id="homepage">
+        <h1>Hire people in your area!</h1>
+        <div id="people"></div>
+    </div>
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+        <script src="https://unpkg.com/react@15/dist/react.js"></script>
+        <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+
+        <!-- Create React Component -->
+        <script type="text/babel">
+    var People = React.createClass({
+        // Initialize state to store fetched people
+        getInitialState: function() {
+            return { people: [] }; // store API results here
+        },
+
+        render: function() {
+            // Map over the state.people array
+            var peopleList = this.state.people.map(function(person) {
+                return (
+                    <li key={person._id}> {/* Use _id as key for React */}
+                        {/* Add a class based on availability */}
+                        <span className={person.available ? "available" : "not-available"}></span>
+                        <span className="name">{person.name}</span>
+                        <span className="rank">{person.rank}</span>
+                        <span className="dist">{Math.floor(person.distance / 1000)} km</span> {/* Correct distance field */}
+                    </li>
+                );
+            });
+
+            return (
+                <div id="person-container">
+                    <form id="search" onSubmit={this.handleSubmit}>
+                        <label>Enter your Latitude:</label>
+                        <input type="text" ref="lat" placeholder="latitude" required />
+                        <label>Enter your Longitude:</label>
+                        <input type="text" ref="lng" placeholder="longitude" required />
+                        <input type="submit" value="Find People" />
+                    </form>
+
+                    <ul>{peopleList}</ul>
+                </div>
+            );
+        },
+
+        handleSubmit: function(e) {
+            e.preventDefault();
+
+            var lng = this.refs.lng.value;
+            var lat = this.refs.lat.value;
+
+            // Use arrow function in .then() to preserve 'this'
+            fetch('/api/people?lng=' + lng + '&lat=' + lat)
+                .then(data => data.json()) // arrow function preserves 'this'
+                .then(json => {
+                    this.setState({ people: json }); // update state with API results
+                    console.log(json); // log results for debugging
+                })
+                .catch(err => console.error(err)); // optional: handle fetch errors
+        }
+    });
+
+    ReactDOM.render(<People />, document.getElementById('people'));
+</script>
+
+
+</body>
+</html>
