@@ -51,8 +51,6 @@ MIT License
 
 ## Contact
 
-Amirhossein Sarabadani
-
-amirhosseinsarabadani@gmail.com
+Amirhossein Sarabadani — amirhosseinsarabadani@gmail.com
 
 Project: https://github.com/emirsara-dev/REST-API
