@@ -25,7 +25,8 @@ node index.js
 ```
 4. The server typically runs on http://localhost:4000 (or the port set in environment variables).
 
-What’s in this repo
+## What’s in this repo
+
 index.js — main server / entry point
 
 routes/ — API route definitions
@@ -36,11 +37,16 @@ public/ — static files
 
 package.json — project metadata and dependencies
 
-Notes
+## Notes
+
 If the app uses environment variables, create a .env file and add values (e.g. PORT, DB_URI) before running.
 
 If you want a packaged start command, ensure package.json has a "start" script (e.g. "start": "node index.js").
 
-Contact
-Amirhossein Sarabadani — amirhosseinsarabadani@gmail.com
+## Contact
+
+Amirhossein Sarabadani
+
+amirhosseinsarabadani@gmail.com
+
 Project: https://github.com/emirsara-dev/REST-API
