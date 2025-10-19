@@ -43,6 +43,12 @@ If the app uses environment variables, create a .env file and add values (e.g. P
 
 If you want a packaged start command, ensure package.json has a "start" script (e.g. "start": "node index.js").
 
+
+## License
+
+MIT License
+
+
 ## Contact
 
 Amirhossein Sarabadani
